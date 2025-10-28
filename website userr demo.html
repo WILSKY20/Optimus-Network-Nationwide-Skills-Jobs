@@ -1,0 +1,913 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Optimus Network — Live Demo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{ --brand-blue:#1d4ed8; --brand-bg:#f1f5f9; --brand-gold:#f59e0b }
+  body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--brand-bg);color:#0f172a}
+  .hidden-sec{display:none}
+  .card{transition:transform .2s ease, box-shadow .2s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+  .chip{display:inline-block;padding:.35rem .6rem;border-radius:999px;border:1px solid #cbd5e1;background:#fff;font-size:.8rem}
+  .chip:hover{background:#f8fafc}
+  .slide-panel{transition:transform .3s ease-in-out}
+  .panel-hidden{transform:translateX(100%)}
+  .active-link{color:var(--brand-blue);font-weight:600}
+  .ribbon{position:absolute;top:10px;left:-8px;background:linear-gradient(90deg,#fbbf24,#f59e0b);color:#111827;font-weight:700;padding:.2rem .6rem;border-top-right-radius:.5rem;border-bottom-right-radius:.5rem;font-size:.7rem}
+</style>
+</head>
+<body>
+
+<!-- ========================= NAVBAR ========================= -->
+<header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur border-b border-blue-200 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+    <a href="#/home" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-2xl bg-blue-700 grid place-items-center text-white font-extrabold">ON</div>
+      <strong class="text-xl text-blue-700">Optimus Network</strong>
+    </a>
+
+    <nav class="hidden md:flex gap-5 text-sm font-medium">
+      <a data-target="home"     href="#/home"     class="navlink active-link">Home</a>
+      <a data-target="join"     href="#/join"     class="navlink">Join</a>
+      <a data-target="states"   href="#/states"   class="navlink">States</a>
+      <a data-target="network"  href="#/network"  class="navlink">Network</a>
+      <a data-target="hub"      href="#/hub"      class="navlink">Talent Hub</a>
+      <a data-target="jobs"     href="#/jobs"     class="navlink">Jobs</a>
+      <a data-target="postjob"  href="#/postjob"  class="navlink">Post Job</a>
+      <a data-target="profile"  href="#/profile"  class="navlink">Profile</a>
+      <a data-target="settings" href="#/settings" class="navlink">Settings</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <!-- Notifications -->
+      <div class="relative">
+        <button id="notifBtn" class="relative">
+          <svg width="22" height="22" fill="none" stroke="#1f2937" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+              d="M14.5 18.5a2.5 2.5 0 01-5 0m9-2.5V11a7 7 0 10-14 0v5l-2 2h18l-2-2z"/>
+          </svg>
+          <span id="notifDot" class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full"></span>
+        </button>
+        <div id="notifMenu" class="hidden absolute right-0 mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow">
+          <div class="p-3 text-sm border-b">Notifications</div>
+          <div class="p-3 text-sm space-y-2">
+            <div class="bg-blue-50 p-2 rounded">Derrick accepted your connection.</div>
+            <div class="bg-blue-50 p-2 rounded">Payment to Sarah processed: $110.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User -->
+      <div class="relative" id="userMenu">
+        <button id="userBtn" class="flex items-center gap-2">
+          <img id="userAvatar" src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full border" />
+          <span id="userName" class="font-medium text-sm">Johnny</span>
+        </button>
+        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-44 bg-white border border-slate-200 rounded-xl shadow">
+          <a href="#/profile"  data-target="profile"  class="block px-4 py-2 text-sm hover:bg-blue-50">My Profile</a>
+          <a href="#/settings" data-target="settings" class="block px-4 py-2 text-sm hover:bg-blue-50">Settings</a>
+          <button id="logoutBtn" class="w-full text-left px-4 py-2 text-sm hover:bg-blue-50 text-red-600">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========================= HOME ========================= -->
+<section id="home" class="section pt-28 pb-20 bg-gradient-to-br from-blue-50 to-white">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-10 px-4">
+    <div>
+      <h1 class="text-5xl font-extrabold leading-tight">Hire local talent across <span class="text-blue-700">all 50 states</span>.</h1>
+      <p class="mt-4 text-lg text-slate-700">Trades, tutors, coders, designers, movers — find skills near you, post jobs, or join the network.</p>
+      <div class="mt-6 flex gap-3">
+        <a data-target="join" href="#/join" class="navlink px-5 py-3 rounded-xl bg-blue-700 text-white font-semibold hover:bg-blue-800">Join Now</a>
+        <a data-target="hub" href="#/hub" class="navlink px-5 py-3 rounded-xl border border-slate-300 font-semibold">Explore Talent Hub</a>
+      </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d" class="rounded-2xl shadow-xl border" alt="People collaborating">
+  </div>
+</section>
+
+<!-- ========================= JOIN ========================= -->
+<section id="join" class="section hidden-sec py-16 bg-blue-50">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold text-blue-700 mb-4">Join Optimus Network</h2>
+    <p class="text-slate-600 mb-8">Create your profile (appears instantly in the Network directory).</p>
+
+    <form id="joinForm" class="bg-white border border-blue-200 rounded-2xl shadow p-6 grid gap-4 text-left">
+      <input id="name" placeholder="Full Name" required class="border rounded-lg px-3 py-2">
+      <input id="role" placeholder="Headline (e.g., Certified Plumber, Math Tutor, Web Developer)" required class="border rounded-lg px-3 py-2">
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <select id="skill" class="border rounded-lg px-3 py-2" required>
+          <option value="">Select Skill</option>
+          <option value="plumbing">Plumbing</option><option value="electrician">Electrical</option>
+          <option value="construction">Construction</option><option value="coding">Coding</option>
+          <option value="data">Data</option><option value="design">Design</option>
+          <option value="sports">Sports</option><option value="writing">Writing</option>
+          <option value="tutoring">Tutoring</option><option value="logistics">Logistics</option>
+        </select>
+
+        <select id="state" class="border rounded-lg px-3 py-2" required></select>
+      </div>
+
+      <select id="stmt" class="border rounded-lg px-3 py-2" required></select>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <input type="number" id="rate" placeholder="Hourly Rate ($)" required class="border rounded-lg px-3 py-2">
+        <input id="img" type="url" placeholder="Profile Image URL (optional)" class="border rounded-lg px-3 py-2">
+      </div>
+
+      <textarea id="bio" placeholder="Your statement (what you offer, experience, values)" rows="4" class="border rounded-lg px-3 py-2" required></textarea>
+
+      <button class="bg-blue-700 text-white font-semibold py-2 rounded-xl hover:bg-blue-800">Create Profile</button>
+    </form>
+
+    <p class="text-xs text-slate-500 mt-3">Joining also enables posting jobs in the “Post Job” portal.</p>
+  </div>
+</section>
+
+<!-- ========================= STATES ========================= -->
+<section id="states" class="section hidden-sec py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-2">Find People by State</h2>
+    <p class="text-slate-600 text-center mb-6">Click a state to view members located there.</p>
+    <div id="stateGrid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3"></div>
+  </div>
+</section>
+
+<!-- ========================= NETWORK (filters) ========================= -->
+<section id="network" class="section hidden-sec py-16 bg-blue-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+      <div>
+        <h2 class="text-3xl font-bold">Network Members</h2>
+        <p class="text-slate-600">Search by name/role, filter by skill, state, <span class="font-semibold">statement tag</span>, and sort by rate/name.</p>
+      </div>
+
+      <form id="filters" class="bg-white border border-blue-200 rounded-2xl p-3 grid sm:grid-cols-2 md:grid-cols-7 gap-3">
+        <input name="q" placeholder="Search name or role…" class="px-3 py-2 rounded-xl border border-slate-300">
+        <select name="skill" class="px-3 py-2 rounded-xl border border-slate-300">
+          <option value="">All skills</option>
+          <option value="plumbing">Plumbing</option><option value="electrician">Electrical</option>
+          <option value="construction">Construction</option><option value="coding">Coding</option>
+          <option value="data">Data</option><option value="design">Design</option>
+          <option value="sports">Sports</option><option value="writing">Writing</option>
+          <option value="tutoring">Tutoring</option><option value="logistics">Logistics</option>
+        </select>
+        <select name="state" class="px-3 py-2 rounded-xl border border-slate-300"></select>
+        <select name="stmt" class="px-3 py-2 rounded-xl border border-slate-300"></select>
+        <input name="min" type="number" min="0" placeholder="Min $" class="px-3 py-2 rounded-xl border border-slate-300">
+        <input name="max" type="number" min="0" placeholder="Max $" class="px-3 py-2 rounded-xl border border-slate-300">
+        <select name="sort" class="px-3 py-2 rounded-xl border border-slate-300">
+          <option value="">Sort</option>
+          <option value="rateAsc">Rate ↑</option><option value="rateDesc">Rate ↓</option>
+          <option value="nameAsc">Name A–Z</option><option value="nameDesc">Name Z–A</option>
+        </select>
+      </form>
+    </div>
+
+    <div id="stmtChips" class="mt-4 flex flex-wrap gap-2"></div>
+    <div id="grid" class="mt-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </div>
+</section>
+
+<!-- ========================= TALENT HUB ========================= -->
+<section id="hub" class="section hidden-sec py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-blue-700 mb-6 text-center">Talent Hub</h2>
+    <p class="text-slate-600 text-center mb-6">Featured professionals offering freelance & contract work.</p>
+    <div id="hubGrid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </div>
+</section>
+
+<!-- =============== RIGHT SLIDE PROFILE PANEL (Hub) =============== -->
+<div id="profilePanel" class="fixed inset-y-0 right-0 w-full max-w-md bg-white border-l border-blue-200 shadow-2xl slide-panel panel-hidden z-50">
+  <div class="flex justify-between items-center px-4 py-3 border-b">
+    <h3 id="panelTitle" class="font-bold text-blue-700">Profile</h3>
+    <button id="closePanel" class="text-2xl leading-none text-slate-500">&times;</button>
+  </div>
+  <div id="panelBody" class="p-4"></div>
+</div>
+
+<!-- ========================= JOBS (public browse demo) ========================= -->
+<section id="jobs" class="section hidden-sec py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-6">Job Listings</h2>
+    <p class="text-slate-600 mb-4">Public demo listings (not linked to Post Job portal).</p>
+    <div id="jobGrid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </div>
+</section>
+
+<!-- ========================= POST JOB (registration-gated) ========================= -->
+<section id="postjob" class="section hidden-sec py-16 bg-blue-50">
+  <div class="max-w-5xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-blue-700 text-center">Post a Job — for Companies & Employers</h2>
+    <p class="text-center text-slate-600 mb-6">Restaurants, retailers, agencies, and organizations can list open roles.</p>
+
+    <!-- Gate (visible if not registered) -->
+    <div id="postGate" class="bg-white border border-blue-200 rounded-2xl p-6 text-center hidden">
+      <p class="text-slate-700 mb-4">You must <span class="font-semibold text-blue-700">join Optimus Network</span> before posting a job.</p>
+      <a href="#/join" data-target="join" class="navlink inline-block px-5 py-3 rounded-xl bg-blue-700 text-white font-semibold hover:bg-blue-800">Join Now</a>
+    </div>
+
+    <!-- Form (visible only if registered) -->
+    <form id="postForm" class="bg-white border border-blue-200 rounded-2xl p-6 grid gap-4 shadow hidden">
+      <!-- Company -->
+      <h3 class="text-xl font-bold text-blue-700">Company Information</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+        <input id="coName" placeholder="Company Name" class="border rounded-lg px-3 py-2" required>
+        <input id="coContact" placeholder="Contact Name" class="border rounded-lg px-3 py-2" required>
+        <input id="coEmail" type="email" placeholder="Contact Email" class="border rounded-lg px-3 py-2" required>
+        <input id="coLogo" type="url" placeholder="Logo URL (optional)" class="border rounded-lg px-3 py-2">
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <select id="coCountry" class="border rounded-lg px-3 py-2" required></select>
+        <select id="coState" class="border rounded-lg px-3 py-2" disabled></select>
+        <input id="coCity" placeholder="City" class="border rounded-lg px-3 py-2">
+      </div>
+      <label class="flex items-center gap-2">
+        <input id="coVerified" type="checkbox" class="w-4 h-4">
+        <span class="text-sm">Add verification badge ($10/mo demo)</span>
+      </label>
+
+      <!-- Job -->
+      <h3 class="text-xl font-bold text-blue-700 pt-2">Job Details</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+        <input id="jobTitle" placeholder="Job Title (e.g., Line Cook, Front-End Engineer)" class="border rounded-lg px-3 py-2" required>
+        <select id="jobCategory" class="border rounded-lg px-3 py-2" required>
+          <option value="">Category</option>
+          <option>Plumbing</option><option>Electrical</option><option>Construction</option>
+          <option>Coding</option><option>Data</option><option>Design</option>
+          <option>Sports</option><option>Writing</option><option>Tutoring</option>
+          <option>Logistics</option><option>Restaurant</option><option>Retail</option>
+          <option>Education</option>
+        </select>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <select id="jobType" class="border rounded-lg px-3 py-2" required>
+          <option value="">Job Type</option>
+          <option>Full-Time</option><option>Part-Time</option>
+          <option>Contract</option><option>Freelance</option>
+        </select>
+        <label class="flex items-center gap-2">
+          <input id="jobRemote" type="checkbox" class="w-4 h-4"><span class="text-sm">Remote OK</span>
+        </label>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <input id="salaryMin" type="number" placeholder="Salary Min" class="border rounded-lg px-3 py-2" required>
+        <input id="salaryMax" type="number" placeholder="Salary Max" class="border rounded-lg px-3 py-2" required>
+        <select id="salaryUnit" class="border rounded-lg px-3 py-2">
+          <option>per year</option><option>per hour</option>
+        </select>
+      </div>
+      <textarea id="jobDesc" rows="4" placeholder="Role description, responsibilities, and requirements…" class="border rounded-lg px-3 py-2" required></textarea>
+
+      <div>
+        <label class="font-medium text-blue-700">Attach job flyer or document (optional)</label>
+        <input type="file" id="jobFile" class="block mt-2 text-sm text-slate-600">
+      </div>
+
+      <button class="bg-blue-700 text-white font-semibold py-2 rounded-xl hover:bg-blue-800">Publish Job</button>
+    </form>
+
+    <!-- Filters & Live Listings (only for this section) -->
+    <div id="postListWrap" class="hidden mt-10">
+      <div class="bg-white border border-blue-200 rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between">
+        <input id="postSearch" placeholder="Search your posted jobs…" class="border rounded-lg px-3 py-2 w-full md:w-1/3">
+        <div class="flex gap-3">
+          <input id="postMin" type="number" placeholder="Min $" class="border rounded-lg px-3 py-2 w-28">
+          <input id="postMax" type="number" placeholder="Max $" class="border rounded-lg px-3 py-2 w-28">
+          <button id="postFilterBtn" class="bg-blue-700 text-white px-4 py-2 rounded-xl hover:bg-blue-800">Filter</button>
+        </div>
+      </div>
+      <div id="postJobGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PROFILE (Johnny) ========================= -->
+<section id="profile" class="section hidden-sec py-16 bg-blue-50">
+  <div class="max-w-5xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-blue-700 mb-4">My Profile</h2>
+    <div class="bg-white border border-blue-200 rounded-2xl p-6">
+      <div class="flex flex-col md:flex-row gap-6 items-center">
+        <img id="meAvatar" src="https://randomuser.me/api/portraits/men/32.jpg" class="w-32 h-32 rounded-full border-4 border-blue-100">
+        <div>
+          <h3 id="meName" class="text-2xl font-bold text-blue-700">Johnny Doe</h3>
+          <p id="meEmail" class="text-slate-600">johnny@example.com</p>
+          <p id="meBio" class="mt-3 text-slate-700">Hi, I’m Johnny — a demo user showcasing account, settings, and transactions!</p>
+          <div class="mt-3 flex gap-2 text-sm">
+            <span class="chip">Saved: <span id="savedCount">0</span></span>
+            <span class="chip">Friends: <span id="friendCount">0</span></span>
+            <span class="chip">Wallet: $<span id="walletAmt">0.00</span></span>
+          </div>
+          <div class="mt-4 flex gap-3">
+            <button id="payBtn" class="bg-blue-700 text-white px-4 py-2 rounded-xl hover:bg-blue-800">Send Payment</button>
+            <a href="#/settings" data-target="settings" class="navlink px-4 py-2 rounded-xl border border-blue-200">Edit Settings</a>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="mt-8 font-bold text-blue-700">Friends</h4>
+      <div id="friendsGrid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-2"></div>
+
+      <h4 class="mt-8 font-bold text-blue-700">Saved Profiles</h4>
+      <div id="savedGrid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-2"></div>
+
+      <h4 class="mt-8 font-bold text-blue-700">Transactions (Demo)</h4>
+      <div id="txnList" class="text-sm text-slate-700 mt-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SETTINGS ========================= -->
+<section id="settings" class="section hidden-sec py-16 bg-white">
+  <div class="max-w-3xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-blue-700 mb-4">Account Settings</h2>
+    <form id="settingsForm" class="bg-blue-50 border border-blue-200 rounded-2xl p-6 grid gap-4">
+      <input id="setName" placeholder="Full Name" class="border rounded-lg px-3 py-2" />
+      <input id="setEmail" placeholder="Email" type="email" class="border rounded-lg px-3 py-2" />
+      <input id="setAvatar" placeholder="Profile Image URL" class="border rounded-lg px-3 py-2" />
+      <textarea id="setBio" placeholder="Bio / About Me" rows="4" class="border rounded-lg px-3 py-2"></textarea>
+      <button class="bg-blue-700 text-white font-semibold py-2 rounded-xl hover:bg-blue-800">Save Changes</button>
+    </form>
+  </div>
+</section>
+
+<!-- ========================= TRANSACTION MODAL ========================= -->
+<div id="txnModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+  <div class="bg-white w-96 rounded-2xl p-6">
+    <h3 class="text-xl font-bold text-blue-700">Send Payment</h3>
+    <p class="text-slate-600 text-sm mb-4">Demo only • 10% platform fee</p>
+    <input id="txnAmount" type="number" placeholder="Enter amount $" class="border rounded-lg w-full px-3 py-2 mb-3" />
+    <p id="feeInfo" class="text-slate-600 text-sm mb-3"></p>
+    <div class="flex gap-2">
+      <button id="confirmTxn" class="flex-1 bg-blue-700 text-white px-4 py-2 rounded-xl hover:bg-blue-800">Process</button>
+      <button id="cancelTxn" class="flex-1 border px-4 py-2 rounded-xl">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<footer class="py-10 text-center text-xs text-blue-100 bg-blue-900 mt-12">
+  © 2025 Optimus Network — Demo
+</footer>
+
+<script>
+/* ===========================================================
+   CONSTANTS & UTILITIES
+=========================================================== */
+const LS_PROFILES='optimus_profiles_v6';
+const LS_SAVED   ='optimus_saved_v1';
+const LS_TXN     ='optimus_txn_v1';
+const LS_USER    ='optimus_user_v1';
+const LS_REGISTERED='optimus_registered_v1'; // flag toggled on Join success
+const LS_POSTED_JOBS='optimus_posted_jobs_v1'; // Post Job portal (company-only)
+
+const US_STATES=["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+
+const STATEMENTS=["Reliable Service","Affordable Rates","Experienced Professional","Fast Response","Customer Focused","Certified Expert","Insured & Licensed","Same-Day Service","Remote-Friendly","Flexible Scheduling"];
+
+const SKILLS=[
+  {key:"plumbing",role:"Certified Plumber"},{key:"electrician",role:"Residential Electrician"},
+  {key:"construction",role:"Construction Specialist"},{key:"coding",role:"Web Developer"},
+  {key:"data",role:"Data Analyst"},{key:"design",role:"Graphic Designer"},
+  {key:"sports",role:"Fitness Trainer"},{key:"writing",role:"Copywriter"},
+  {key:"tutoring",role:"Math Tutor"},{key:"logistics",role:"Moving & Hauling"}
+];
+
+const COUNTRIES=[{code:'US',name:'United States',flag:'🇺🇸'},{code:'CA',name:'Canada',flag:'🇨🇦'},{code:'GB',name:'United Kingdom',flag:'🇬🇧'},{code:'AU',name:'Australia',flag:'🇦🇺'},{code:'IN',name:'India',flag:'🇮🇳'}];
+const US_STATES_ABBR=["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
+
+function rand(a){return a[Math.floor(Math.random()*a.length)]}
+function randint(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+function fmt(n){return (Math.round(n*100)/100).toFixed(2)}
+
+/* ===========================================================
+   USER (Johnny) + NOTIFICATIONS
+=========================================================== */
+function getUser(){
+  const v=localStorage.getItem(LS_USER);
+  if(v) return JSON.parse(v);
+  const u={name:"Johnny Doe",email:"johnny@example.com",img:"https://randomuser.me/api/portraits/men/32.jpg",bio:"Hi, I’m Johnny — a demo user showcasing account, settings, and transactions!",wallet:0,friends:[
+    {name:"Ava Smith",role:"Graphic Designer",img:"https://randomuser.me/api/portraits/women/25.jpg"},
+    {name:"Noah Brown",role:"Web Developer",img:"https://randomuser.me/api/portraits/men/38.jpg"},
+    {name:"Mia Johnson",role:"Tutor",img:"https://randomuser.me/api/portraits/women/47.jpg"}
+  ]};
+  localStorage.setItem(LS_USER,JSON.stringify(u)); return u;
+}
+function setUser(u){localStorage.setItem(LS_USER,JSON.stringify(u))}
+function isRegistered(){ return localStorage.getItem(LS_REGISTERED)==='true' }
+function markRegistered(){ localStorage.setItem(LS_REGISTERED,'true') }
+
+function renderUserHeader(){
+  const u=getUser();
+  document.getElementById('userAvatar').src=u.img;
+  document.getElementById('userName').textContent=u.name.split(' ')[0];
+  document.getElementById('meAvatar').src=u.img;
+  document.getElementById('meName').textContent=u.name;
+  document.getElementById('meEmail').textContent=u.email;
+  document.getElementById('meBio').textContent=u.bio;
+  document.getElementById('walletAmt').textContent=fmt(u.wallet);
+  // friends
+  const fg=document.getElementById('friendsGrid');
+  fg.innerHTML=u.friends.map(f=>`
+    <div class="bg-white border border-blue-200 rounded-xl p-3 text-center">
+      <img src="${f.img}" class="w-16 h-16 rounded-full mx-auto mb-2" />
+      <div class="font-semibold text-blue-700 text-sm">${f.name}</div>
+      <div class="text-xs text-slate-500">${f.role}</div>
+      <button class="mt-2 px-3 py-1 rounded-lg text-sm bg-blue-700 text-white">Message</button>
+    </div>`).join('');
+  document.getElementById('friendCount').textContent=u.friends.length;
+}
+
+/* Notifications dropdown */
+const notifBtn=document.getElementById('notifBtn');
+const notifMenu=document.getElementById('notifMenu');
+notifBtn.onclick=()=>notifMenu.classList.toggle('hidden');
+window.addEventListener('click',(e)=>{if(!notifMenu.contains(e.target)&&e.target!==notifBtn)notifMenu.classList.add('hidden')});
+
+/* User dropdown */
+const userBtn=document.getElementById('userBtn');
+const userDropdown=document.getElementById('userDropdown');
+userBtn.onclick=()=>userDropdown.classList.toggle('hidden');
+window.addEventListener('click',(e)=>{if(!userDropdown.contains(e.target)&&e.target!==userBtn)userDropdown.classList.add('hidden')});
+document.getElementById('logoutBtn').onclick=()=>{localStorage.removeItem(LS_USER);localStorage.removeItem(LS_REGISTERED);location.reload()}
+
+/* ===========================================================
+   DATA: Seed Profiles (48 for brevity)
+=========================================================== */
+const FIRST=["Ava","Noah","Mia","Liam","Ethan","Emma","Olivia","Isabella","Sophia","Jackson","Lucas","Amelia","Charlotte","Harper","Evelyn","Abigail","Elijah","James","Benjamin","Michael","Logan","Mason","Aiden","Henry","Carter","Sebastian","Mateo","Jack","Levi","Grayson"];
+const LAST =["Johnson","Smith","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson"];
+
+function makeProfile(i){
+  const name=`${rand(FIRST)} ${rand(LAST)}`;
+  const s=rand(SKILLS);
+  const state=US_STATES[i%US_STATES.length];
+  const stmt=rand(STATEMENTS);
+  const rate=randint(25,90);
+  const img=`https://randomuser.me/api/portraits/${i%2?'women':'men'}/${(i%90)+1}.jpg`;
+  return {id:'p'+(1000+i),name,role:s.role,skill:s.key,state,stmt,rate,img,bio:`I’m a(n) ${s.role.toLowerCase()} in ${state}. ${stmt}. I value clear communication and on-time delivery.`,endorse:randint(1,40),featured:Math.random()<.18};
+}
+function seedIfEmpty(){
+  if(!localStorage.getItem(LS_PROFILES)){
+    const arr=[]; for(let i=0;i<48;i++) arr.push(makeProfile(i));
+    localStorage.setItem(LS_PROFILES,JSON.stringify(arr));
+  }
+}
+function getProfiles(){return JSON.parse(localStorage.getItem(LS_PROFILES)||'[]')}
+function setProfiles(v){localStorage.setItem(LS_PROFILES,JSON.stringify(v))}
+
+/* ===========================================================
+   JOIN FORM (also sets registered flag)
+=========================================================== */
+const joinForm=document.getElementById('joinForm');
+function populateSelect(el,arr,allLabel){
+  el.innerHTML = allLabel ? `<option value="">${allLabel}</option>` : '';
+  arr.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;el.appendChild(o);});
+}
+populateSelect(document.getElementById('state'),US_STATES,null);
+populateSelect(document.getElementById('stmt'),STATEMENTS,null);
+
+joinForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const p={
+    id:'p'+Date.now(),
+    name:document.getElementById('name').value.trim(),
+    role:document.getElementById('role').value.trim(),
+    skill:document.getElementById('skill').value,
+    state:document.getElementById('state').value,
+    stmt:document.getElementById('stmt').value,
+    rate:Number(document.getElementById('rate').value),
+    img:document.getElementById('img').value.trim()||`https://randomuser.me/api/portraits/${Math.random()>.5?'men':'women'}/${randint(1,90)}.jpg`,
+    bio:document.getElementById('bio').value.trim(),
+    endorse:0,featured:false
+  };
+  const arr=getProfiles(); arr.push(p); setProfiles(arr);
+  // Mark as registered
+  markRegistered();
+  alert('Profile created & registered! You can now post jobs in the Post Job portal.');
+  joinForm.reset(); location.hash='#/network'; handleRoute();
+});
+
+/* ===========================================================
+   STATES SECTION
+=========================================================== */
+const stateGrid=document.getElementById('stateGrid');
+stateGrid.innerHTML = US_STATES.map(s=>`<button class="chip text-blue-800 border-blue-200" data-state="${s}">${s}</button>`).join('');
+stateGrid.addEventListener('click',(e)=>{
+  const b=e.target.closest('[data-state]'); if(!b) return;
+  document.querySelector('#filters select[name="state"]').value=b.dataset.state;
+  location.hash='#/network'; handleRoute(); applyFilters();
+});
+
+/* ===========================================================
+   NETWORK (filters + render)
+=========================================================== */
+const filtersForm=document.getElementById('filters');
+populateSelect(filtersForm.querySelector('select[name="state"]'),US_STATES,'All states');
+populateSelect(filtersForm.querySelector('select[name="stmt"]'),STATEMENTS,'All statements');
+filtersForm.addEventListener('input',applyFilters);
+
+const grid=document.getElementById('grid');
+function isSaved(id){return (JSON.parse(localStorage.getItem(LS_SAVED)||'[]')).includes(id)}
+function card(p){
+  return `
+  <div class="relative card bg-white border border-blue-200 rounded-2xl p-4">
+    ${p.featured ? '<span class="ribbon">FEATURED</span>' : ''}
+    <div class="text-right -mt-2 -mr-2">
+      <button class="saveBtn" data-id="${p.id}" title="Save">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="${isSaved(p.id)?'#ef4444':'none'}" stroke="#ef4444">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="text-center -mt-3">
+      <img src="${p.img}" class="w-24 h-24 rounded-full mx-auto mb-3 border-4 border-blue-100 object-cover" />
+      <div class="font-bold text-lg text-blue-700">${p.name}</div>
+      <div class="text-slate-600 text-sm">${p.role}</div>
+      <div class="text-xs mt-1"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">${p.skill.toUpperCase()}</span></div>
+      <div class="text-xs text-slate-500 mt-1">${p.state} • ${p.stmt}</div>
+      <div class="mt-2 text-blue-700 font-semibold">$${p.rate}/hr</div>
+      <div class="mt-1 text-xs text-slate-600">Endorsements: <span id="endorse-${p.id}">${p.endorse}</span></div>
+      <div class="mt-3 flex justify-center gap-2">
+        <a href="#/profile/${p.id}" class="px-3 py-1 border rounded-lg text-sm">View</a>
+        <button class="endorseBtn px-3 py-1 rounded-lg text-sm bg-blue-700 text-white" data-id="${p.id}">Endorse</button>
+      </div>
+    </div>
+  </div>`;
+}
+function renderNetwork(list){ grid.innerHTML=list.map(card).join('') || "<p class='text-slate-600'>No results.</p>"; }
+
+function applyFilters(){
+  let out=getProfiles();
+  const f=filtersForm;
+  const q=(f.q.value||'').toLowerCase();
+  const skill=f.skill.value, state=f.state.value, stmt=f.stmt.value;
+  const min=Number(f.min.value||0), max=Number(f.max.value||Infinity);
+  const sort=f.sort.value;
+
+  out=out.filter(p=>{
+    const qOK=!q || `${p.name} ${p.role} ${p.bio}`.toLowerCase().includes(q);
+    const sOK=!skill || p.skill===skill;
+    const stOK=!state || p.state===state;
+    const smOK=!stmt || p.stmt===stmt;
+    const rOK=p.rate>=min && p.rate<=max;
+    return qOK&&sOK&&stOK&&smOK&&rOK;
+  }).sort((a,b)=>{
+    if(a.featured && !b.featured) return -1;
+    if(!a.featured && b.featured) return 1;
+    if(sort==='rateAsc') return a.rate-b.rate;
+    if(sort==='rateDesc') return b.rate-a.rate;
+    if(sort==='nameAsc') return a.name.localeCompare(b.name);
+    if(sort==='nameDesc') return b.name.localeCompare(a.name);
+    return 0;
+  });
+
+  renderNetwork(out);
+}
+
+/* Save / Endorse handlers */
+grid.addEventListener('click',(e)=>{
+  const save=e.target.closest('.saveBtn');
+  const end=e.target.closest('.endorseBtn');
+  if(save){ toggleSave(save.dataset.id); applyFilters(); updateSavedUI(); }
+  if(end){
+    const id=end.dataset.id;
+    const arr=getProfiles(); const p=arr.find(x=>x.id===id); if(!p) return;
+    p.endorse++; setProfiles(arr);
+    const el=document.getElementById('endorse-'+id); if(el) el.textContent=p.endorse;
+  }
+});
+function getSaved(){return JSON.parse(localStorage.getItem(LS_SAVED)||'[]')}
+function setSaved(a){localStorage.setItem(LS_SAVED,JSON.stringify(a))}
+function toggleSave(id){
+  const s=getSaved();
+  if(s.includes(id)) setSaved(s.filter(x=>x!==id));
+  else {s.push(id); setSaved(s);}
+}
+function updateSavedUI(){
+  const savedIds=getSaved(); const all=getProfiles();
+  const saved=all.filter(p=>savedIds.includes(p.id));
+  document.getElementById('savedGrid').innerHTML=saved.map(p=>`
+    <div class="bg-white border border-blue-200 rounded-xl p-3">
+      <div class="flex items-center gap-3">
+        <img src="${p.img}" class="w-12 h-12 rounded-full border">
+        <div>
+          <div class="font-semibold text-blue-700">${p.name}</div>
+          <div class="text-xs text-slate-500">${p.role}</div>
+        </div>
+      </div>
+    </div>
+  `).join('') || "<p class='text-slate-600'>No saved profiles yet.</p>";
+  document.getElementById('savedCount').textContent=saved.length;
+}
+
+/* ===========================================================
+   TALENT HUB (featured subset + slide panel)
+=========================================================== */
+const hubGrid=document.getElementById('hubGrid');
+function renderHub(){
+  const all=getProfiles();
+  const featured=all.filter(p=>p.featured).slice(0,12);
+  hubGrid.innerHTML = featured.map(p=>`
+    <div class="relative card bg-blue-50 border border-blue-200 rounded-2xl p-4 text-center">
+      <span class="ribbon">FEATURED</span>
+      <img src="${p.img}" class="w-24 h-24 rounded-full mx-auto mb-2 border-4 border-blue-100 object-cover">
+      <h4 class="font-bold text-blue-700">${p.name}</h4>
+      <p class="text-slate-600">${p.role}</p>
+      <p class="text-blue-700 font-semibold mt-1">$${p.rate}/hr</p>
+      <div class="mt-2 flex justify-center gap-2">
+        <button class="viewPanel px-3 py-1 rounded-lg text-sm bg-blue-700 text-white" data-id="${p.id}">View Profile</button>
+        <button class="saveBtn px-3 py-1 rounded-lg text-sm border" data-id="${p.id}">Save</button>
+      </div>
+    </div>
+  `).join('');
+}
+const panel=document.getElementById('profilePanel');
+const panelBody=document.getElementById('panelBody');
+document.getElementById('closePanel').onclick=()=>panel.classList.add('panel-hidden');
+
+hubGrid.addEventListener('click',(e)=>{
+  const v=e.target.closest('.viewPanel'); const s=e.target.closest('.saveBtn');
+  if(s){toggleSave(s.dataset.id); updateSavedUI(); return;}
+  if(!v) return;
+  const id=v.dataset.id; const p=getProfiles().find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('panelTitle').textContent=p.name;
+  panelBody.innerHTML=`
+    <img src="${p.img}" class="w-28 h-28 rounded-full mx-auto border-4 border-blue-100">
+    <div class="text-center mt-2">
+      <div class="font-semibold">${p.role}</div>
+      <div class="text-xs text-slate-600">${p.state} • ${p.stmt}</div>
+      <div class="mt-2 text-blue-700 font-bold">$${p.rate}/hour</div>
+      <p class="mt-2 text-sm text-slate-700">${p.bio}</p>
+      <div class="mt-3 flex justify-center gap-2">
+        <button class="connectBtn bg-blue-700 text-white px-3 py-2 rounded-lg" data-id="${p.id}" data-name="${p.name}">Connect & Pay</button>
+        <button class="endorseBtn px-3 py-2 rounded-lg border" data-id="${p.id}">Endorse (${p.endorse})</button>
+      </div>
+    </div>`;
+  panel.classList.remove('panel-hidden');
+});
+panelBody.addEventListener('click',(e)=>{
+  if(e.target.classList.contains('connectBtn')) openTxn();
+  if(e.target.classList.contains('endorseBtn')){
+    const id=e.target.dataset.id;
+    const arr=getProfiles(); const p=arr.find(x=>x.id===id); if(!p) return;
+    p.endorse++; setProfiles(arr);
+    e.target.textContent=`Endorse (${p.endorse})`;
+    applyFilters();
+  }
+});
+
+/* ===========================================================
+   JOBS (public demo list only)
+=========================================================== */
+const JOBS=[{title:"Website Redesign",pay:700,desc:"2–3 week front-end project"},
+{title:"Kitchen Repipe",pay:1200,desc:"Licensed plumber required"},
+{title:"Algebra Tutoring",pay:45,desc:"Weekly sessions"},
+{title:"Logo & Brand Pack",pay:350,desc:"Logo + social kit"}];
+document.getElementById('jobGrid').innerHTML=JOBS.map(j=>`
+  <div class="card bg-blue-50 border border-blue-200 rounded-2xl p-4 text-left">
+    <h4 class="font-bold text-lg text-blue-700">${j.title}</h4>
+    <p class="text-slate-600 text-sm mb-2">${j.desc}</p>
+    <p class="font-semibold text-blue-800">$${j.pay}</p>
+    <button class="mt-3 w-full bg-blue-700 text-white font-semibold py-2 rounded-xl hover:bg-blue-800" onclick="alert('Demo: Apply flow coming soon')">Apply</button>
+  </div>`).join('');
+
+/* ===========================================================
+   POST JOB PORTAL (registration-gated, not synced to Jobs)
+=========================================================== */
+const postGate=document.getElementById('postGate');
+const postForm=document.getElementById('postForm');
+const postListWrap=document.getElementById('postListWrap');
+const postJobGrid=document.getElementById('postJobGrid');
+
+const coCountry=document.getElementById('coCountry');
+const coState=document.getElementById('coState');
+
+function fillCountries(){
+  coCountry.innerHTML='';
+  COUNTRIES.forEach(c=>{const o=document.createElement('option');o.value=c.code;o.textContent=`${c.flag} ${c.name}`;coCountry.appendChild(o)});
+}
+function enableState(){
+  coState.disabled=coCountry.value!=='US';
+  coState.innerHTML='';
+  if(!coState.disabled){US_STATES_ABBR.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;coState.appendChild(o)})}
+}
+function getPosted(){return JSON.parse(localStorage.getItem(LS_POSTED_JOBS)||'[]')}
+function setPosted(v){localStorage.setItem(LS_POSTED_JOBS,JSON.stringify(v))}
+function postCard(j){
+  const flag=COUNTRIES.find(x=>x.code===j.country)?.flag||'🌍';
+  const flyer=j.fileName?`<p class="mt-1 text-xs text-blue-600">📎 Attached: ${j.fileName}</p>`:'';
+  const featured=j.verified?'<span class="ribbon">FEATURED</span>':'';
+  const loc=`${j.city?j.city+', ':''}${j.state?j.state+', ':''}${j.country}`;
+  return `
+  <div class="relative card bg-white border border-blue-200 rounded-2xl p-4 flex flex-col">
+    ${featured}
+    <div class="flex items-center gap-3 mb-2">
+      <img src="${j.logo}" class="w-12 h-12 rounded-lg border">
+      <div class="flex-1">
+        <div class="font-bold text-blue-700">${j.title}</div>
+        <div class="text-sm text-slate-600">${j.company}${j.verified?' • <span class="text-amber-600 font-semibold">Verified</span>':''}</div>
+      </div>
+    </div>
+    <div class="text-sm text-slate-600 mb-2">${flag} ${loc}</div>
+    <div class="flex flex-wrap gap-2 mb-2 text-sm">
+      <span class="border border-slate-300 px-2 py-1 rounded">${j.category}</span>
+      <span class="border border-slate-300 px-2 py-1 rounded">${j.type}</span>
+      ${j.remote?'<span class="border border-slate-300 px-2 py-1 rounded">Remote</span>':''}
+    </div>
+    <div class="text-blue-700 font-semibold mb-2">$${fmt(j.salaryMin)}–$${fmt(j.salaryMax)} ${j.salaryUnit}</div>
+    <p class="text-sm text-slate-700 mb-3">${j.desc}</p>
+    ${flyer}
+    <button class="bg-blue-700 text-white py-2 rounded-xl hover:bg-blue-800 mt-auto">Apply Now</button>
+  </div>`;
+}
+function renderPosted(list=getPosted()){
+  postJobGrid.innerHTML=list.map(postCard).join('') || "<p class='text-slate-600'>No jobs posted yet.</p>";
+}
+function refreshPostJobGate(){
+  const reg=isRegistered();
+  postGate.classList.toggle('hidden', reg);
+  postForm.classList.toggle('hidden', !reg);
+  postListWrap.classList.toggle('hidden', !reg);
+}
+
+/* Post Job form handlers */
+postForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const file=document.getElementById('jobFile').files[0];
+  const j={
+    id:'j'+Date.now(),
+    company:document.getElementById('coName').value.trim(),
+    contact:document.getElementById('coContact').value.trim(),
+    email:document.getElementById('coEmail').value.trim(),
+    logo:document.getElementById('coLogo').value.trim()||'https://dummyimage.com/120x120/1d4ed8/ffffff&text=ON',
+    country:document.getElementById('coCountry').value,
+    state:document.getElementById('coState').disabled?'':document.getElementById('coState').value,
+    city:document.getElementById('coCity').value.trim(),
+    verified:document.getElementById('coVerified').checked,
+    title:document.getElementById('jobTitle').value.trim(),
+    category:document.getElementById('jobCategory').value,
+    type:document.getElementById('jobType').value,
+    remote:document.getElementById('jobRemote').checked,
+    salaryMin:Number(document.getElementById('salaryMin').value),
+    salaryMax:Number(document.getElementById('salaryMax').value),
+    salaryUnit:document.getElementById('salaryUnit').value,
+    desc:document.getElementById('jobDesc').value.trim(),
+    fileName:file?file.name:''
+  };
+  const arr=getPosted(); arr.unshift(j); setPosted(arr);
+  postForm.reset(); enableState();
+  alert('Job published to your Post Job portal!');
+  renderPosted();
+});
+
+/* Post Job filters */
+document.getElementById('postFilterBtn').addEventListener('click',()=>{
+  const q=document.getElementById('postSearch').value.toLowerCase();
+  const min=parseFloat(document.getElementById('postMin').value)||0;
+  const max=parseFloat(document.getElementById('postMax').value)||Infinity;
+  const out=getPosted().filter(j=>{
+    return(!q||`${j.title} ${j.company}`.toLowerCase().includes(q))&& j.salaryMax>=min && j.salaryMin<=max;
+  });
+  renderPosted(out);
+});
+
+/* Country/state init for Post Job */
+function initPostJobSelectors(){
+  fillCountries(); enableState();
+  coCountry.addEventListener('change',enableState);
+}
+
+/* ===========================================================
+   TRANSACTIONS (demo payment + 10% fee)
+=========================================================== */
+function getTxn(){return JSON.parse(localStorage.getItem(LS_TXN)||'[]')}
+function setTxn(v){localStorage.setItem(LS_TXN,JSON.stringify(v))}
+function renderTxn(){
+  const list=getTxn();
+  document.getElementById('txnList').innerHTML=list.map(t=>`
+    <div class="border-b py-2 flex justify-between">
+      <span>${t.date} — ${t.to}</span>
+      <span>$${fmt(t.total)} <span class="text-xs text-slate-500">(fee $${fmt(t.fee)})</span></span>
+    </div>`).join('') || "<p class='text-slate-600'>No transactions yet.</p>";
+}
+const txnModal=document.getElementById('txnModal');
+function openTxn(){txnModal.classList.remove('hidden');txnModal.classList.add('flex')}
+document.getElementById('payBtn').onclick=openTxn;
+document.getElementById('cancelTxn').onclick=()=>{txnModal.classList.add('hidden');txnModal.classList.remove('flex')}
+document.getElementById('confirmTxn').onclick=()=>{
+  const amt=parseFloat(document.getElementById('txnAmount').value||0);
+  if(!amt||amt<=0){alert('Enter a valid amount');return}
+  const fee=amt*.10, total=amt+fee;
+  document.getElementById('feeInfo').textContent=`Platform fee: $${fmt(fee)} • Total charge: $${fmt(total)}`;
+  const list=getTxn();
+  list.unshift({to:"Freelancer",amount:amt,fee,total,date:new Date().toLocaleString()});
+  setTxn(list);
+  const u=getUser(); u.wallet = (u.wallet||0) - total; setUser(u);
+  renderUserHeader(); renderTxn();
+  setTimeout(()=>{alert('Demo transaction complete!');document.getElementById('txnAmount').value='';txnModal.classList.add('hidden');txnModal.classList.remove('flex')},650);
+};
+txnModal.addEventListener('click',(e)=>{if(e.target===txnModal)document.getElementById('cancelTxn').click()})
+
+/* ===========================================================
+   SETTINGS
+=========================================================== */
+const setForm=document.getElementById('settingsForm');
+function loadSettings(){
+  const u=getUser();
+  setForm.setName.value=u.name;
+  setForm.setEmail.value=u.email;
+  setForm.setAvatar.value=u.img;
+  setForm.setBio.value=u.bio;
+}
+setForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const u=getUser();
+  u.name=setForm.setName.value||u.name;
+  u.email=setForm.setEmail.value||u.email;
+  u.img=setForm.setAvatar.value||u.img;
+  u.bio=setForm.setBio.value||u.bio;
+  setUser(u); renderUserHeader(); alert('Settings saved.');
+});
+
+/* ===========================================================
+   SIMPLE ROUTER
+=========================================================== */
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.id===id?s.classList.remove('hidden-sec'):s.classList.add('hidden-sec'));
+  document.querySelectorAll('.navlink').forEach(a=>a.classList.toggle('active-link',a.dataset.target===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function handleRoute(){
+  const hash=location.hash.replace('#/','')||'home';
+  const parts=hash.split('/');
+  if(parts[0]==='profile' && parts[1]){ // quick-view other member via route
+    const id=parts[1]; const p=getProfiles().find(x=>x.id===id);
+    if(p){
+      document.getElementById('panelTitle').textContent=p.name;
+      panelBody.innerHTML=`
+        <img src="${p.img}" class="w-28 h-28 rounded-full mx-auto border-4 border-blue-100">
+        <div class="text-center mt-2">
+          <div class="font-semibold">${p.role}</div>
+          <div class="text-xs text-slate-600">${p.state} • ${p.stmt}</div>
+          <div class="mt-2 text-blue-700 font-bold">$${p.rate}/hour</div>
+          <p class="mt-2 text-sm text-slate-700">${p.bio}</p>
+          <div class="mt-3 flex justify-center gap-2">
+            <button class="connectBtn bg-blue-700 text-white px-3 py-2 rounded-lg">Connect & Pay</button>
+            <button class="endorseBtn px-3 py-2 rounded-lg border" data-id="${p.id}">Endorse (${p.endorse})</button>
+          </div>
+        </div>`;
+      panel.classList.remove('panel-hidden');
+      return;
+    }
+  }
+  show(parts[0]);
+  if(parts[0]==='postjob'){ refreshPostJobGate(); } // gate recalculated on enter
+}
+window.addEventListener('hashchange',handleRoute);
+
+/* ===========================================================
+   INIT
+=========================================================== */
+function init(){
+  seedIfEmpty();
+  renderUserHeader();
+
+  // filters setup
+  populateSelect(filtersForm.state,US_STATES,'All states');
+  populateSelect(filtersForm.stmt,STATEMENTS,'All statements');
+
+  // statement chips
+  document.getElementById('stmtChips').innerHTML=STATEMENTS.map(s=>`<button class="chip" data-stmt="${s}">${s}</button>`).join('');
+  document.getElementById('stmtChips').addEventListener('click',(e)=>{
+    const b=e.target.closest('[data-stmt]'); if(!b) return;
+    filtersForm.stmt.value=b.dataset.stmt; applyFilters();
+  });
+
+  // render areas
+  applyFilters();
+  renderHub();
+  updateSavedUI();
+  renderTxn();
+
+  // Post Job portal init
+  initPostJobSelectors();
+  renderPosted(); // if registered, show existing posted jobs when entering
+  refreshPostJobGate();
+
+  // nav clicks
+  document.querySelectorAll('a.navlink').forEach(a=>a.addEventListener('click',()=>show(a.dataset.target)));
+  // default route
+  location.hash=location.hash||'#/home'; handleRoute();
+}
+init();
+</script>
+</body>
+</html>
