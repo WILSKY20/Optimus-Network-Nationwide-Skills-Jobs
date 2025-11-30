@@ -1,35 +1,26 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =========================================================
-       META / TITLE / CSS
-       Tip: keep Tailwind for speed during prototyping.
-  ========================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Optimus Network — Nationwide Skills & Jobs</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* ============== Global styles ============== */
     :root{
-      --brand-blue:#1d4ed8; /* link/buttons */
-      --brand-bg:#f1f5f9;   /* page background */
-      --brand-gold:#fbbf24; /* optional accents */
+      --brand-blue:#1d4ed8;
+      --brand-bg:#f1f5f9;
+      --brand-gold:#fbbf24;
     }
     body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--brand-bg);color:#0f172a;scroll-behavior:smooth}
     .card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.08);transition:.25s}
     .hidden-sec{display:none}
     .active-link{color:var(--brand-blue);font-weight:600}
     .chip{display:inline-block;padding:.35rem .6rem;border-radius:999px;border:1px solid #cbd5e1;background:#fff;font-size:.8rem}
-    .chip:hover{background:#f8fafc}
+    .chip:hover{background:#f8fafc;cursor:pointer}
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-<!-- =========================================================
-     NAV / HEADER
-     Prompt: keep the same header on future multi-page builds
-========================================================== -->
 <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur border-b border-blue-200 z-50">
   <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
     <a href="#/" class="flex items-center gap-2">
@@ -48,10 +39,7 @@
   </div>
 </header>
 
-<!-- =========================================================
-     HOME
-     Prompt: hero should be motivating & clear CTA
-========================================================== -->
+<!-- HOME -->
 <section id="home" class="flex-grow section pt-28 pb-20 bg-gradient-to-br from-blue-50 to-white">
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-10 px-4">
     <div>
@@ -70,10 +58,7 @@
   </div>
 </section>
 
-<!-- =========================================================
-     ABOUT
-     Prompt: keep short, focus on trust
-========================================================== -->
+<!-- ABOUT -->
 <section id="about" class="flex-grow section hidden-sec pt-28 pb-16 bg-white">
   <div class="max-w-5xl mx-auto text-center px-4">
     <h2 class="text-3xl font-bold mb-4 text-blue-700">About Optimus Network</h2>
@@ -85,10 +70,7 @@
   </div>
 </section>
 
-<!-- =========================================================
-     JOIN / REGISTRATION
-     Prompt: capture state + statement; data stored to localStorage
-========================================================== -->
+<!-- JOIN -->
 <section id="join" class="flex-grow section hidden-sec pt-28 pb-16 bg-blue-50">
   <div class="max-w-4xl mx-auto px-4 text-center">
     <h2 class="text-4xl font-bold text-blue-700 mb-4">Join Optimus Network</h2>
@@ -97,7 +79,6 @@
     <form id="joinForm" class="bg-white border border-blue-200 rounded-2xl shadow p-6 grid gap-4 text-left">
       <input id="name" placeholder="Full Name" required class="border rounded-lg px-3 py-2">
       <input id="role" placeholder="Headline (e.g., Certified Plumber, Math Tutor, Web Developer)" required class="border rounded-lg px-3 py-2">
-
       <div class="grid md:grid-cols-2 gap-4">
         <select id="skill" class="border rounded-lg px-3 py-2" required>
           <option value="">Select Skill</option>
@@ -107,30 +88,20 @@
           <option value="sports">Sports</option><option value="writing">Writing</option>
           <option value="tutoring">Tutoring</option><option value="logistics">Logistics</option>
         </select>
-
-        <!-- State selector (50 states) -->
         <select id="state" class="border rounded-lg px-3 py-2" required></select>
       </div>
-
-      <!-- Statement tag (filters later) -->
       <select id="stmt" class="border rounded-lg px-3 py-2" required></select>
-
       <div class="grid md:grid-cols-2 gap-4">
         <input type="number" id="rate" placeholder="Hourly Rate ($)" required class="border rounded-lg px-3 py-2">
         <input id="img" type="url" placeholder="Profile Image URL (optional)" class="border rounded-lg px-3 py-2">
       </div>
-
       <textarea id="bio" placeholder="Your statement (what you offer, experience, values)" rows="4" class="border rounded-lg px-3 py-2" required></textarea>
-
       <button class="bg-blue-700 text-white font-semibold py-2 rounded-xl hover:bg-blue-800">Create Profile</button>
     </form>
   </div>
 </section>
 
-<!-- =========================================================
-     STATES (Showcase of all 50 states with quick filter)
-     Prompt: Clicking a state applies filter & jumps to Network
-========================================================== -->
+<!-- STATES -->
 <section id="states" class="flex-grow section hidden-sec pt-28 pb-16 bg-white">
   <div class="max-w-7xl mx-auto px-4">
     <h2 class="text-3xl font-bold text-center mb-2">Find People by State</h2>
@@ -139,10 +110,7 @@
   </div>
 </section>
 
-<!-- =========================================================
-     NETWORK DIRECTORY (with filters)
-     Prompt: add “Statement” filter + state dropdown + skill + search
-========================================================== -->
+<!-- NETWORK -->
 <section id="network" class="flex-grow section hidden-sec pt-28 pb-16 bg-blue-50">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -150,8 +118,6 @@
         <h2 class="text-3xl font-bold">Network Members</h2>
         <p class="text-slate-600">Search by name/role, filter by skill, state, <span class="font-semibold">statement tag</span>, and sort by rate/name.</p>
       </div>
-
-      <!-- Filter panel -->
       <form id="filters" class="bg-white border border-blue-200 rounded-2xl p-3 grid sm:grid-cols-2 md:grid-cols-7 gap-3">
         <input name="q" placeholder="Search name or role…" class="px-3 py-2 rounded-xl border border-slate-300">
         <select name="skill" class="px-3 py-2 rounded-xl border border-slate-300">
@@ -173,17 +139,12 @@
         </select>
       </form>
     </div>
-
-    <!-- Statement Tag quick chips -->
     <div id="stmtChips" class="mt-4 flex flex-wrap gap-2"></div>
-
     <div id="grid" class="mt-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
   </div>
 </section>
 
-<!-- =========================================================
-     PROFILE VIEW (routed: #/profile/:id)
-========================================================== -->
+<!-- PROFILE VIEW -->
 <section id="profileView" class="flex-grow section hidden-sec pt-28 pb-16 bg-white">
   <div class="max-w-4xl mx-auto px-4">
     <a href="#/network" class="inline-flex items-center gap-2 text-blue-700 mb-6">&larr; Back to Network</a>
@@ -191,9 +152,7 @@
   </div>
 </section>
 
-<!-- =========================================================
-     JOBS
-========================================================== -->
+<!-- JOBS -->
 <section id="jobs" class="flex-grow section hidden-sec pt-28 pb-16 bg-white">
   <div class="max-w-7xl mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold mb-6">Job Listings</h2>
@@ -201,9 +160,7 @@
   </div>
 </section>
 
-<!-- =========================================================
-     MARKETPLACE
-========================================================== -->
+<!-- MARKETPLACE -->
 <section id="market" class="flex-grow section hidden-sec pt-28 pb-16 bg-white">
   <div class="max-w-7xl mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold mb-6">Marketplace</h2>
@@ -211,228 +168,101 @@
   </div>
 </section>
 
-<!-- =========================================================
-     FOOTER
-========================================================== -->
 <footer class="py-12 bg-blue-900 text-blue-100 text-center text-sm">
   <p>© 2025 Optimus Network — Nationwide skills & opportunity.</p>
 </footer>
 
-<!-- =========================================================
-     SCRIPT: Data, Seeding, Filters, Routing
-     Prompt: read the section headers; each block is isolated
-========================================================== -->
-<script>
-/* ========== CONSTANTS / UTILITIES ========== */
-const LS_PROFILES = 'optimus_profiles_v4';
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
 
-const US_STATES = [
-  "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware",
-  "Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky",
-  "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi",
-  "Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico",
-  "New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania",
-  "Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont",
-  "Virginia","Washington","West Virginia","Wisconsin","Wyoming"
-];
+const firebaseConfig = {
+  apiKey: "AIzaSyApvSx0EoW4D7e65xVCTod4cq10NZGcjto",
+  authDomain: "optimus-network-8bfc0.firebaseapp.com",
+  projectId: "optimus-network-8bfc0",
+  storageBucket: "optimus-network-8bfc0.appspot.com",
+  messagingSenderId: "551403058510",
+  appId: "1:551403058510:web:5ed17df20990623ca51a1f",
+  measurementId: "G-MPN7KHMYDX"
+};
 
-const STATEMENTS = [
-  "Reliable Service","Affordable Rates","Experienced Professional","Fast Response",
-  "Customer Focused","Certified Expert","Insured & Licensed","Same-Day Service",
-  "Remote-Friendly","Flexible Scheduling"
-];
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-function rand(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-function randint(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+const US_STATES = [...Array(50).keys()].map(i=>["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"][i]);
+const STATEMENTS = ["Reliable Service","Affordable Rates","Experienced Professional","Fast Response","Customer Focused","Certified Expert","Insured & Licensed","Same-Day Service","Remote-Friendly","Flexible Scheduling"];
 
-/* ========== POPULATE SELECTS (State & Statement) ========== */
-function populateStateSelect(selectEl, includeAll){
-  selectEl.innerHTML = includeAll ? `<option value="">All states</option>` : '';
-  US_STATES.forEach(s=>{
-    const o=document.createElement('option');o.value=s;o.textContent=s;selectEl.appendChild(o);
-  });
-}
-function populateStmtSelect(selectEl, includeAll){
-  selectEl.innerHTML = includeAll ? `<option value="">All statements</option>` : '';
-  STATEMENTS.forEach(s=>{
-    const o=document.createElement('option');o.value=s;o.textContent=s;selectEl.appendChild(o);
-  });
-}
+function populateSelect(sel, arr, allOption){ sel.innerHTML = allOption?`<option value="">All</option>`:""; arr.forEach(a=>{ const o=document.createElement('option'); o.value=a;o.textContent=a;sel.appendChild(o); }); }
 
-/* ========== DEMO SEEDING: 120+ PROFILES ========== */
-const FIRST = ["Ava","Noah","Mia","Liam","Ethan","Emma","Olivia","Isabella","Sophia","Jackson","Lucas","Amelia","Charlotte","Harper","Evelyn","Abigail","Elijah","James","Benjamin","Michael","Logan","Mason","Aiden","Henry","Carter","Sebastian","Mateo","Jack","Levi","Grayson"];
-const LAST  = ["Johnson","Smith","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson"];
-const SKILLS = [
-  {key:"plumbing", role:"Certified Plumber"},
-  {key:"electrician", role:"Residential Electrician"},
-  {key:"construction", role:"Construction Specialist"},
-  {key:"coding", role:"Web Developer"},
-  {key:"data", role:"Data Analyst"},
-  {key:"design", role:"Graphic Designer"},
-  {key:"sports", role:"Fitness Trainer"},
-  {key:"writing", role:"Copywriter"},
-  {key:"tutoring", role:"Math Tutor"},
-  {key:"logistics", role:"Moving & Hauling"}
-];
-
-function makeSeedProfile(i){
-  const name = `${rand(FIRST)} ${rand(LAST)}`;
-  const skill = rand(SKILLS);
-  const state = US_STATES[i % US_STATES.length];
-  const stmt  = rand(STATEMENTS);
-  const rate = randint(20,80);
-  const img = `https://randomuser.me/api/portraits/${i%2===0?'men':'women'}/${(i%90)+1}.jpg`;
-  const bio = `I’m an ${skill.role.toLowerCase()} based in ${state}. ${stmt}. I care about clear communication and on-time delivery.`;
-  return { id:'p'+(1000+i), name, role:skill.role, skill:skill.key, state, rate, img, bio, stmt };
-}
-
-function seedIfEmpty(){
-  if(!localStorage.getItem(LS_PROFILES)){
-    const list=[];
-    for(let i=0;i<120;i++){ list.push(makeSeedProfile(i)); }
-    localStorage.setItem(LS_PROFILES, JSON.stringify(list));
-  }
-}
-
-/* ========== STORAGE HELPERS ========== */
-function getProfiles(){ return JSON.parse(localStorage.getItem(LS_PROFILES)||'[]'); }
-function setProfiles(arr){ localStorage.setItem(LS_PROFILES, JSON.stringify(arr)); }
-
-/* ========== ROUTING (sections + profile route) ========== */
-const sections = Array.from(document.querySelectorAll('.section'));
-function show(id){
-  sections.forEach(s=>s.id===id ? s.classList.remove('hidden-sec') : s.classList.add('hidden-sec'));
-  document.querySelectorAll('.navlink').forEach(a=>a.classList.toggle('active-link', a.dataset.target===id));
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function handleRoute(){
-  const hash = location.hash || '#/';
-  const parts = hash.replace(/^#\//,'').split('/');
-  if(parts[0]==='profile' && parts[1]){ renderProfile(parts[1]); show('profileView'); return; }
-  switch(parts[0]){
-    case '': show('home'); break;
-    case 'about': show('about'); break;
-    case 'join': show('join'); break;
-    case 'states': show('states'); break;
-    case 'network': show('network'); break;
-    case 'jobs': show('jobs'); break;
-    case 'market': show('market'); break;
-    default: show('home');
-  }
-}
-window.addEventListener('hashchange', handleRoute);
-
-/* ========== JOIN FORM (includes state + statement) ========== */
 const joinForm = document.getElementById('joinForm');
 const joinState = document.getElementById('state');
-const joinStmt  = document.getElementById('stmt');
-populateStateSelect(joinState,false);
-populateStmtSelect(joinStmt,false);
+const joinStmt = document.getElementById('stmt');
+populateSelect(joinState,US_STATES,false);
+populateSelect(joinStmt,STATEMENTS,false);
 
-joinForm.addEventListener('submit', e=>{
+async function addProfile(p){ await addDoc(collection(db,'profiles'),p); }
+
+joinForm.addEventListener('submit', async e=>{
   e.preventDefault();
   const p = {
-    id: 'p'+Date.now(),
     name: document.getElementById('name').value.trim(),
     role: document.getElementById('role').value.trim(),
     skill: document.getElementById('skill').value,
     state: document.getElementById('state').value,
-    stmt:  document.getElementById('stmt').value,
-    rate:  Number(document.getElementById('rate').value),
-    img:   document.getElementById('img').value.trim() || `https://randomuser.me/api/portraits/${Math.random()>.5?'men':'women'}/${randint(1,90)}.jpg`,
-    bio:   document.getElementById('bio').value.trim()
+    stmt: document.getElementById('stmt').value,
+    rate: Number(document.getElementById('rate').value),
+    img: document.getElementById('img').value.trim() || `https://randomuser.me/api/portraits/${Math.random()>.5?'men':'women'}/${Math.floor(Math.random()*90)+1}.jpg`,
+    bio: document.getElementById('bio').value.trim()
   };
-  const list = getProfiles(); list.push(p); setProfiles(list);
+  await addProfile(p);
   alert('Profile created! Check the Network page.');
-  joinForm.reset(); location.hash='#/network';
+  joinForm.reset();
+  location.hash='#/network';
 });
 
-/* ========== STATES SECTION (50 clickable state cards) ========== */
 const stateGrid = document.getElementById('stateGrid');
-stateGrid.innerHTML = US_STATES.map(s=>`
-  <button class="chip text-blue-800 border-blue-200" data-state="${s}">${s}</button>
-`).join('');
-stateGrid.addEventListener('click',(e)=>{
-  const btn = e.target.closest('[data-state]');
-  if(!btn) return;
-  // Apply state filter and navigate to Network
-  filtersForm.state.value = btn.dataset.state;
-  location.hash = '#/network';
-  applyFilters();
-});
+US_STATES.forEach(s=>{ stateGrid.innerHTML+=`<button class="chip text-blue-800 border-blue-200" data-state="${s}">${s}</button>`; });
+stateGrid.addEventListener('click',e=>{ const b=e.target.closest('[data-state]'); if(!b)return; filtersForm.state.value=b.dataset.state; location.hash='#/network'; applyFilters(); });
 
-/* ========== STATEMENT CHIPS (quick filter list) ========== */
 const stmtChips = document.getElementById('stmtChips');
-stmtChips.innerHTML = STATEMENTS.map(s=>`<button class="chip" data-stmt="${s}">${s}</button>`).join('');
-stmtChips.addEventListener('click',(e)=>{
-  const b = e.target.closest('[data-stmt]'); if(!b) return;
-  filtersForm.stmt.value = b.dataset.stmt;
-  applyFilters();
-});
+STATEMENTS.forEach(s=>stmtChips.innerHTML+=`<button class="chip" data-stmt="${s}">${s}</button>`);
+stmtChips.addEventListener('click',e=>{ const b=e.target.closest('[data-stmt]'); if(!b)return; filtersForm.stmt.value=b.dataset.stmt; applyFilters(); });
 
-/* ========== NETWORK FILTERS + RENDERING ========== */
-const filtersForm = document.getElementById('filters');
-const filterState = filtersForm.querySelector('select[name="state"]');
-const filterStmt  = filtersForm.querySelector('select[name="stmt"]');
-populateStateSelect(filterState,true);
-populateStmtSelect(filterStmt,true);
+const filtersForm=document.getElementById('filters');
+populateSelect(filtersForm.state,US_STATES,true);
+populateSelect(filtersForm.stmt,STATEMENTS,true);
+filtersForm.addEventListener('input',applyFilters);
+const grid=document.getElementById('grid');
 
-filtersForm.addEventListener('input', applyFilters);
+function profileCard(p){ return `
+  <a href="#/profile/${p.id}" class="card block bg-white border border-blue-200 rounded-2xl p-4 text-center">
+    <img src="${p.img}" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover border-4 border-blue-100" alt="">
+    <div class="font-bold text-lg text-blue-700">${p.name}</div>
+    <div class="text-slate-600 text-sm">${p.role}</div>
+    <div class="mt-1 text-xs"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">${p.skill.toUpperCase()}</span></div>
+    <div class="mt-1 text-xs text-slate-500">${p.state}</div>
+    <div class="mt-1 text-xs text-slate-600">${p.stmt}</div>
+    <div class="text-blue-700 font-semibold mt-2">$${p.rate}/hr</div>
+  </a>
+`; }
 
-const grid = document.getElementById('grid');
+function renderNetwork(list){ grid.innerHTML=list.map(profileCard).join('')||`<p class="text-slate-600">No results. Try clearing filters.</p>`; }
 
-function profileCard(p){
-  return `
-    <a href="#/profile/${p.id}" class="card block bg-white border border-blue-200 rounded-2xl p-4 text-center">
-      <img src="${p.img}" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover border-4 border-blue-100" alt="">
-      <div class="font-bold text-lg text-blue-700">${p.name}</div>
-      <div class="text-slate-600 text-sm">${p.role}</div>
-      <div class="mt-1 text-xs"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">${p.skill.toUpperCase()}</span></div>
-      <div class="mt-1 text-xs text-slate-500">${p.state}</div>
-      <div class="mt-1 text-xs text-slate-600">${p.stmt}</div>
-      <div class="text-blue-700 font-semibold mt-2">$${p.rate}/hr</div>
-    </a>
-  `;
-}
-
-function renderNetwork(list){ grid.innerHTML = list.map(profileCard).join('') || `<p class="text-slate-600">No results. Try clearing filters.</p>`; }
-
-function applyFilters(){
-  const all = getProfiles();
-  const q = (filtersForm.q.value||'').toLowerCase();
-  const sk = filtersForm.skill.value;
-  const st = filtersForm.state.value;
-  const sm = filtersForm.stmt.value;
-  const min = Number(filtersForm.min.value||0);
-  const max = Number(filtersForm.max.value||Infinity);
-  const sort = filtersForm.sort.value;
-
-  let out = all.filter(p=>{
-    const matchQ = !q || [p.name,p.role,p.bio].join(' ').toLowerCase().includes(q);
-    const matchSkill = !sk || p.skill===sk;
-    const matchState = !st || p.state===st;
-    const matchStmt  = !sm || p.stmt===sm;
-    const matchRate  = p.rate>=min && p.rate<=max;
-    return matchQ && matchSkill && matchState && matchStmt && matchRate;
-  });
-
-  out = out.sort((a,b)=>{
-    if(sort==='rateAsc') return a.rate-b.rate;
-    if(sort==='rateDesc') return b.rate-a.rate;
-    if(sort==='nameAsc') return a.name.localeCompare(b.name);
-    if(sort==='nameDesc') return b.name.localeCompare(a.name);
-    return 0;
-  });
-
+async function applyFilters(){
+  const snap=await getDocs(collection(db,'profiles'));
+  let all=snap.docs.map(d=>({id:d.id,...d.data()}));
+  const q=(filtersForm.q.value||'').toLowerCase(),sk=filtersForm.skill.value,st=filtersForm.state.value,sm=filtersForm.stmt.value,min=Number(filtersForm.min.value||0),max=Number(filtersForm.max.value||Infinity),sort=filtersForm.sort.value;
+  let out=all.filter(p=> (!q||[p.name,p.role,p.bio].join(' ').toLowerCase().includes(q)) && (!sk||p.skill===sk) && (!st||p.state===st) && (!sm||p.stmt===sm) && (p.rate>=min&&p.rate<=max));
+  out=out.sort((a,b)=>{ if(sort==='rateAsc') return a.rate-b.rate; if(sort==='rateDesc') return b.rate-a.rate; if(sort==='nameAsc') return a.name.localeCompare(b.name); if(sort==='nameDesc') return b.name.localeCompare(a.name); return 0; });
   renderNetwork(out);
 }
 
-/* ========== PROFILE VIEW (details) ========== */
-const profileContainer = document.getElementById('profileContainer');
-function renderProfile(id){
-  const p = getProfiles().find(x=>x.id===id);
-  if(!p){ profileContainer.innerHTML = `<p class="text-slate-600">Profile not found.</p>`; return; }
-  profileContainer.innerHTML = `
+const profileContainer=document.getElementById('profileContainer');
+async function renderProfile(id){
+  const snap=await getDocs(collection(db,'profiles'));
+  const p=snap.docs.map(d=>({id:d.id,...d.data()})).find(x=>x.id===id);
+  if(!p){ profileContainer.innerHTML=`<p class="text-slate-600">Profile not found.</p>`; return; }
+  profileContainer.innerHTML=`
     <div class="grid md:grid-cols-3 gap-6">
       <div class="md:col-span-1 text-center">
         <img src="${p.img}" class="w-40 h-40 rounded-2xl mx-auto object-cover border-4 border-blue-100" alt="">
@@ -454,47 +284,25 @@ function renderProfile(id){
   `;
 }
 
-/* ========== JOBS & MARKETPLACE (demo seed) ========== */
-const JOBS = [
-  {title:"Website Redesign", pay:700, desc:"Small business seeks front-end developer (2–3 weeks)."},
-  {title:"Kitchen Repipe", pay:1200, desc:"Licensed plumber for repipe and fixtures."},
-  {title:"Algebra Tutoring", pay:45, desc:"Weekly sessions for high-school student."},
-  {title:"Logo & Brand Pack", pay:350, desc:"Clean logo + social kit for local cafe."}
-];
-const MARKET = [
-  {title:"DeWalt Drill Set", price:120, img:"https://images.unsplash.com/photo-1567016538700-5b1f4d84b110"},
-  {title:"27” Monitor", price:180, img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc"},
-  {title:"Moving Boxes (20)", price:25, img:"https://images.unsplash.com/photo-1616627982214-09766a62b769"},
-  {title:"Contractor Tool Bag", price:60, img:"https://images.unsplash.com/photo-1598033129183-c4f50c736f10"}
-];
-
-document.getElementById('jobGrid').innerHTML = JOBS.map(j=>`
-  <div class="card bg-blue-50 border border-blue-200 rounded-2xl p-4 text-left">
-    <h4 class="font-bold text-lg text-blue-700">${j.title}</h4>
-    <p class="text-slate-600 text-sm mb-2">${j.desc}</p>
-    <p class="font-semibold text-blue-800">$${j.pay}</p>
-    <button class="mt-3 w-full bg-blue-700 text-white font-semibold py-2 rounded-xl hover:bg-blue-800" onclick="alert('Demo: Apply flow coming soon')">Apply</button>
-  </div>
-`).join('');
-
-document.getElementById('marketGrid').innerHTML = MARKET.map(m=>`
-  <div class="card bg-white border border-blue-200 rounded-2xl p-4 text-left">
-    <img src="${m.img}" class="rounded-xl mb-3" alt="">
-    <h4 class="font-bold text-lg text-blue-700">${m.title}</h4>
-    <p class="font-semibold text-blue-800">$${m.price}</p>
-    <button class="mt-3 w-full bg-blue-700 text-white font-semibold py-2 rounded-xl hover:bg-blue-800" onclick="alert('Demo: Contact seller flow coming soon')">Contact Seller</button>
-  </div>
-`).join('');
-
-/* ========== INIT (seed, render, route) ========== */
-function init(){
-  seedIfEmpty();                // 1) preload 120+ people if empty
-  populateStateSelect(filtersForm.state,true); // 2) filter dropdown
-  populateStmtSelect(filtersForm.stmt,true);   // 3) statement dropdown
-  applyFilters();               // 4) initial directory render
-  handleRoute();                // 5) show section based on hash
+/* ROUTING */
+const sections=Array.from(document.querySelectorAll('.section'));
+function show(id){ sections.forEach(s=>s.id===id?s.classList.remove('hidden-sec'):s.classList.add('hidden-sec')); document.querySelectorAll('.navlink').forEach(a=>a.classList.toggle('active-link', a.dataset.target===id)); window.scrollTo({top:0,behavior:'smooth'}); }
+function handleRoute(){
+  const hash=location.hash||"#/",parts=hash.replace(/^#\//,'').split('/');
+  if(parts[0]==='profile'&&parts[1]){ renderProfile(parts[1]); show('profileView'); return; }
+  switch(parts[0]){
+    case '': show('home'); break;
+    case 'about': show('about'); break;
+    case 'join': show('join'); break;
+    case 'states': show('states'); break;
+    case 'network': show('network'); break;
+    case 'jobs': show('jobs'); break;
+    case 'market': show('market'); break;
+    default: show('home');
+  }
 }
-init();
+window.addEventListener('hashchange', handleRoute);
+window.addEventListener('load',()=>{ applyFilters(); handleRoute(); });
 </script>
 </body>
 </html>
